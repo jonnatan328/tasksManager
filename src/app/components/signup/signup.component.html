@@ -1,0 +1,66 @@
+<div class="modal-header">
+    <h4 class="modal-title pull-left">{{title}}</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()" class="signup-form">
+        <div class="form-group">
+            <label for="firstName" class="label-signup text-uppercase">Nombre</label>
+            <input type="text" id="firstName" formControlName="firstName" class="form-control" placeholder="" 
+                [ngClass]="{ 'is-invalid': formSignupCtrl.firstName.touched && formSignupCtrl.firstName.errors }">
+            <div *ngIf="formSignupCtrl.firstName.invalid && (formSignupCtrl.firstName.dirty || formSignupCtrl.firstName.touched)" class="invalid-feedback">
+                <div *ngIf="formSignupCtrl.firstName.errors.required">El nombre es requerido</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="lastName" class="label-signup text-uppercase">Apellido</label>
+            <input type="text" id="lastName" formControlName="lastName" class="form-control" placeholder="" 
+                [ngClass]="{ 'is-invalid': formSignupCtrl.lastName.touched && formSignupCtrl.lastName.errors }">
+            <div *ngIf="formSignupCtrl.lastName.invalid && (formSignupCtrl.lastName.dirty || formSignupCtrl.lastName.touched)" class="invalid-feedback">
+                <div *ngIf="formSignupCtrl.lastName.errors.required">El apellido es requerido</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="email" class="label-signup text-uppercase">Correo</label>
+            <input type="email" id="email" formControlName="email" class="form-control" placeholder="" 
+                [ngClass]="{ 'is-invalid': formSignupCtrl.email.touched && formSignupCtrl.email.errors }">
+            <div *ngIf="formSignupCtrl.email.invalid && (formSignupCtrl.email.dirty || formSignupCtrl.email.touched)" class="invalid-feedback">
+                <div *ngIf="formSignupCtrl.email.errors.required">El correo es requerido</div>
+                <div *ngIf="formSignupCtrl.email.errors.pattern">Correo electrónico incorrecto</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="phone" class="label-signup text-uppercase">Teléfono</label>
+            <input type="number" id="phone" formControlName="phone" class="form-control" placeholder="" 
+                [ngClass]="{ 'is-invalid': formSignupCtrl.phone.touched && formSignupCtrl.phone.errors }">
+            <div *ngIf="formSignupCtrl.phone.invalid && (formSignupCtrl.phone.dirty || formSignupCtrl.phone.touched)" class="invalid-feedback">
+                <div *ngIf="formSignupCtrl.phone.errors.required">El teléfono es requerido</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="password" class="label-signup text-uppercase">Contraseña</label>
+            <input type="password" id="password" formControlName="password" class="form-control" placeholder=""
+                [ngClass]="{ 'is-invalid': formSignupCtrl.password.touched && formSignupCtrl.password.errors }">
+            <div *ngIf="formSignupCtrl.password.invalid && formSignupCtrl.password.errors" class="invalid-feedback">
+                <div *ngIf="formSignupCtrl.password.errors.required">La contraseña es requerida</div>
+                <div *ngIf="formSignupCtrl.password.errors.minlength">La contraseña debe ser minimo de 8 caracteres.</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="confirmPassword" class="label-signup text-uppercase">Confirmar contraseña</label>
+            <input type="password" id="confirmPassword" formControlName="confirmPassword" class="form-control" placeholder=""
+                [ngClass]="{ 'is-invalid': formSignupCtrl.confirmPassword.touched && formSignupCtrl.confirmPassword.errors }">
+            <div *ngIf="formSignupCtrl.confirmPassword.invalid && formSignupCtrl.confirmPassword.errors" class="invalid-feedback">
+                <div *ngIf="formSignupCtrl.confirmPassword.errors.required">La contraseña es requerida</div>
+                <div *ngIf="formSignupCtrl.confirmPassword.errors.minlength">La contraseña debe ser minimo de 8 caracteres.</div>
+                <div *ngIf="formSignupCtrl.confirmPassword.errors.mustMatch">Las contraseñas deben coincidir.</div>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-success float-right" [disabled]="signUpForm.invalid">Enviar</button>
+    </form>
+</div>
+<div class="modal-footer">
+    
+</div>

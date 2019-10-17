@@ -1,0 +1,83 @@
+<section class="login-block">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 login-sec">
+                <h2 class="text-center">Iniciar sesión</h2>
+                <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+                    <div class="form-group">
+                        <label for="email" class="text-uppercase">Correo</label>
+                        <input type="text" id="email" formControlName="email" class="form-control" placeholder=""
+                        [ngClass]="{ 'is-invalid': formCtrl.email.touched && formCtrl.email.errors }">
+                        <div *ngIf="formCtrl.email.invalid && (formCtrl.email.dirty || formCtrl.email.touched)" class="invalid-feedback">
+                            <div *ngIf="formCtrl.email.errors.required">El correo es requerido</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="password" class="text-uppercase">Contraseña</label>
+                        <input type="password" id="password" formControlName="password" class="form-control" placeholder=""
+                        [ngClass]="{ 'is-invalid': formCtrl.password.touched && formCtrl.password.errors }">
+                        <div *ngIf="formCtrl.password.invalid && formCtrl.password.errors" class="invalid-feedback">
+                            <div *ngIf="formCtrl.password.errors.required">La contraseña es requerida</div>
+                            <div *ngIf="formCtrl.password.errors.minlength">La contraseña debe ser minimo de 8 caracteres.</div>
+                        </div>
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input">
+                            <small>Recuerdame</small>
+                        </label>
+                        <button type="submit" [disabled]="loginForm.invalid" class="btn btn-login bg-success float-right">Enviar</button>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-8 banner-sec">
+                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                    </ol>
+                    <div class="carousel-inner" role="listbox">
+                        <div class="carousel-item active">
+                            <img class="d-block img-fluid" src="https://static.pexels.com/photos/33972/pexels-photo.jpg"
+                                alt="First slide">
+                            <div class="carousel-caption d-none d-md-block">
+                                <div class="banner-text">
+                                    <h2>This is First Slide</h2>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                                        nostrud exercitation</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img class="d-block img-fluid" src="https://images.pexels.com/photos/7097/people-coffee-tea-meeting.jpg"
+                                alt="Second slide">
+                            <div class="carousel-caption d-none d-md-block">
+                                <div class="banner-text">
+                                    <h2>This is Second Slide</h2>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                                        nostrud exercitation</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img class="d-block img-fluid" src="https://images.pexels.com/photos/872957/pexels-photo-872957.jpeg"
+                                alt="Third slide">
+                            <div class="carousel-caption d-none d-md-block">
+                                <div class="banner-text">
+                                    <h2>This is Heaven</h2>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                                        nostrud exercitation</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

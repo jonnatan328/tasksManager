@@ -1,0 +1,9 @@
+<div *ngIf="currentUser; then loggedIn else public"></div>
+
+<ng-template #public>
+    <app-login></app-login>
+</ng-template>
+
+<ng-template #loggedIn>
+    <app-task class="container"></app-task>
+</ng-template>
