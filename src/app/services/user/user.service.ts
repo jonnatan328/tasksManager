@@ -11,7 +11,9 @@ export class UserService {
   userRegistered: Array<User> = [];
   usersLength: number = 0;
 
-  constructor() { }
+  constructor() { 
+    this.userRegistered.push(new User("Jonnatan", "Rios", "jrios328@gmail.com", "3217921137", "12345678"))
+  }
 
   /**
    * Valida que el usuario no se encuentre registrado y lo guarda en memoria
