@@ -13,14 +13,20 @@ export class UserService {
 
   constructor() { }
 
+  /**
+   * Valida que el usuario no se encuentre registrado y lo guarda en memoria
+   * @param user 
+   */
   saveUser(user: User) {
-    let userFound = this.userRegistered.find(user => user.email == user.email);
+    let userFound = this.userRegistered.find(userSaved => user.email == userSaved.email);
+    console.log('userFound: ', userFound);
     if (userFound) {
       return {
         code: '301',
         message: 'error'
       }
     }
+    
     let currentLength = this.userRegistered.push(user);
     if (currentLength && (currentLength - this.usersLength) === 1) {
       this.usersLength++;
@@ -40,12 +46,19 @@ export class UserService {
     return this.userRegistered
   }
 
+  /**
+   * Busca al usuario en memoria por email y contrasena
+   * @param email 
+   * @param password 
+   */
   getUserToAuth(email: string, password: string): any {
     let userFound: User = this.userRegistered.find(user => user.email == email && user.password == password)
     const resObsevable = new Observable((observer) => {
       if (!userFound) {
-        console.log("Usuario no existe");
-        observer.complete();
+        observer.error({
+          code: "400",
+          message: 'User not found'
+        });
       } else {
         observer.next({
           body: {

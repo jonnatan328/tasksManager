@@ -77,6 +77,7 @@ export class SignupComponent implements OnInit {
     
     // Realiza el llamado al servicio de registro
     let resRegistered = this.userService.saveUser(this.user);
+    
     //Mapea el mensaje de error según el código de respuesta
     if (resRegistered.code === "200") {
       this.bsModalRef.hide();
@@ -85,7 +86,6 @@ export class SignupComponent implements OnInit {
         message: 'Se ha registrado su cuenta exitosamente.'
       };
       this.bsModalRef = this.modalService.show(SuccessModalComponent, {initialState});
-      console.log("Usuarios guardados", this.userService.getUsers());
     } else if (resRegistered.code === "500") {
       this.toastr.error('', "Ha ocurrido un error al registrar su cuenta.");
     } else if (resRegistered.code === "301"){

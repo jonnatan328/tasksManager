@@ -8,13 +8,15 @@ import { AuthenticationService } from "../../services/authentication/authenticat
   styleUrls: ['./home.component.sass']
 })
 export class HomeComponent implements OnInit {
-  public title: string;
   currentUser: User;
 
+  /**
+   * Crea la instancia del componente home
+   * @param authenticationService Servicio para validar si un usuario esta logueado
+   */
   constructor(
     private authenticationService: AuthenticationService
   ) {
-    this.title = 'Página principal';
     this.authenticationService.currentUser.subscribe(user => this.currentUser = user);
   }
 

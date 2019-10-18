@@ -7,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FooterComponent implements OnInit {
 
+  /**
+   * Crea la instancia del componente footer
+   */
   constructor() { }
 
   ngOnInit() {

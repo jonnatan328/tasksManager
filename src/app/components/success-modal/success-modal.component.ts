@@ -8,6 +8,10 @@ import { BsModalRef } from 'ngx-bootstrap/modal';
 })
 export class SuccessModalComponent implements OnInit {
 
+  /**
+   * Crea la instancia del componente del modal de exito
+   * @param bsModalRef 
+   */
   constructor(
     public bsModalRef: BsModalRef
   ) { }

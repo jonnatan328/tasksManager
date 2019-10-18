@@ -32,13 +32,13 @@ import { SuccessModalComponent } from './components/success-modal/success-modal.
 @NgModule({
   declarations: [
     AppComponent,
+    SignupComponent,
     HomeComponent,
     NavbarComponent,
     FooterComponent,
     ErrorComponent,
     LoginComponent,
     TaskComponent,
-    SignupComponent,
     SuccessModalComponent
   ],
   imports: [
