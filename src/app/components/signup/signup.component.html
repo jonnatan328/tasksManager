@@ -35,9 +35,7 @@
             <label for="phone" class="label-signup text-uppercase">Teléfono</label>
             <input type="number" id="phone" formControlName="phone" class="form-control" placeholder="" 
                 [ngClass]="{ 'is-invalid': formSignupCtrl.phone.touched && formSignupCtrl.phone.errors }">
-            <div *ngIf="formSignupCtrl.phone.invalid && (formSignupCtrl.phone.dirty || formSignupCtrl.phone.touched)" class="invalid-feedback">
-                <div *ngIf="formSignupCtrl.phone.errors.required">El teléfono es requerido</div>
-            </div>
+            <div *ngIf="handleError('name', 'required') && (formSignupCtrl.phone.dirty || formSignupCtrl.phone.touched)" class="invalid-feedback">>El proyecto es requerido</div>
         </div>
         <div class="form-group">
             <label for="password" class="label-signup text-uppercase">Contraseña</label>

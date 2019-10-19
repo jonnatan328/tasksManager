@@ -19,8 +19,7 @@ export class InterceptorService implements HttpInterceptor{
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    console.log("Request interceptor: ", req);
-    console.log("Api base url: ", this.apiBaseUrl);
+    
     req = req.clone({
       headers:req.headers.set(
         "Authorization",
@@ -28,7 +27,6 @@ export class InterceptorService implements HttpInterceptor{
       ),
       url:this.apiBaseUrl + "" + req.url
     });
-    console.log("url final: ", req.url);
     
     return next.handle(req);
   }

@@ -20,6 +20,8 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { ToastrModule } from 'ngx-toastr';
 
 import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
+
 import { HttpClientModule, HTTP_INTERCEPTORS  } from '@angular/common/http';
 
 //Servicios
@@ -28,6 +30,9 @@ import { APP_CONFIG, APP_DI_CONFIG } from "./services/appConfig/appConfig.consta
 import { LoginComponent } from './components/login/login.component';
 import { TaskComponent } from './components/task/task.component';
 import { SuccessModalComponent } from './components/success-modal/success-modal.component';
+import { FilterPipe } from './pipes/filter/filter.pipe';
+import { CreateTaskComponent } from './components/create-task/create-task.component';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 @NgModule({
   declarations: [
@@ -39,24 +44,33 @@ import { SuccessModalComponent } from './components/success-modal/success-modal.
     ErrorComponent,
     LoginComponent,
     TaskComponent,
-    SuccessModalComponent
+    SuccessModalComponent,
+    FilterPipe,
+    CreateTaskComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
+    FormsModule,
     HttpClientModule,
     CollapseModule,
     CarouselModule,
     ButtonsModule,
     ModalModule.forRoot(),
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    BsDatepickerModule.forRoot()
   ],
   providers: [
     { provide: APP_CONFIG, useValue: APP_DI_CONFIG },
     { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true }
   ],
-  bootstrap: [AppComponent, SignupComponent, SuccessModalComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [
+    SignupComponent,
+    SuccessModalComponent,
+    CreateTaskComponent
+  ],
 })
 export class AppModule { }

@@ -1,0 +1,49 @@
+<div class="modal-header">
+    <h4 class="modal-title pull-left">{{title}}</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+        <form [formGroup]="createTaskForm" (ngSubmit)="onSubmit()" class="signup-form">
+            <div class="form-group">
+                <label for="name" class="label-signup text-uppercase">Nombre</label>
+                <input type="text" id="name" formControlName="name" class="form-control" placeholder="" 
+                    [ngClass]="{ 'is-invalid': createTaskFormCtrl.name.touched && createTaskFormCtrl.name.errors }">
+                <div *ngIf="createTaskFormCtrl.name.invalid && (createTaskFormCtrl.name.dirty || createTaskFormCtrl.name.touched)" class="invalid-feedback">
+                    <div *ngIf="createTaskFormCtrl.name.errors.required">El nombre es requerido</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="project" class="label-signup text-uppercase">Proyecto</label>
+                <select id="project" formControlName="project" class="form-control" [ngClass]="{ 'is-invalid': createTaskFormCtrl.project.touched && createTaskFormCtrl.project.errors }">
+                    <option >Seleccione un proyecto</option>
+                    <option *ngFor="let project of projects">{{project.name}}</option>
+                </select>
+                <div *ngIf="createTaskFormCtrl.project.invalid && (createTaskFormCtrl.project.dirty || createTaskFormCtrl.project.touched)" class="invalid-feedback">
+                    <div *ngIf="createTaskFormCtrl.project.errors.required">El apellido es requerido</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="deadline" class="label-signup text-uppercase">Fecha limite</label>
+                <input type="text" id="deadline" bsDatepicker formControlName="deadline" class="form-control" placeholder="Seleccione la fecha limite"
+                    [bsConfig]="{ isAnimated: true }"
+                    [ngClass]="{ 'is-invalid': createTaskFormCtrl.deadline.touched && createTaskFormCtrl.deadline.errors }">
+                <div *ngIf="createTaskFormCtrl.deadline.invalid && (createTaskFormCtrl.deadline.dirty || createTaskFormCtrl.deadline.touched)" class="invalid-feedback">
+                        <div *ngIf="createTaskFormCtrl.deadline.errors.required">La fecha limite es requerida</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="comment" class="label-signup text-uppercase">Comentario</label>
+                <textarea id="comment" formControlName="comment" class="form-control" placeholder="" 
+                    [ngClass]="{ 'is-invalid': createTaskFormCtrl.comment.touched && createTaskFormCtrl.comment.errors }"></textarea>
+                <div *ngIf="createTaskFormCtrl.comment.invalid && (createTaskFormCtrl.comment.dirty || createTaskFormCtrl.comment.touched)" class="invalid-feedback">
+                    <div *ngIf="createTaskFormCtrl.comment.errors.required">El comentario es requerido</div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-success float-right" [disabled]="createTaskForm.invalid">Enviar</button>
+        </form>
+    </div>
+    <div class="modal-footer">
+        
+    </div>

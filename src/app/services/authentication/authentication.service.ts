@@ -38,6 +38,7 @@ export class AuthenticationService {
    * @param password Contrasena del usuario
    */
   login(email: string, password: string){
+    // Seccion de codigo para el llamado de servicios Rest
     /*return this.http.post<any>('/auth/login', {"email": email, "password": password})
     .pipe(map(res => {
       console.log("Usuario respuesta", res);

@@ -1,30 +1,40 @@
-
-<button type="button" class="btn btn-primary">
-    Agregar
-</button>
-<div *ngIf="!tasks">
-    Cargando listado de productos...
-</div>
-<div *ngIf="tasks">
-    <div class="table-responsive">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>CÓDIGO</th>
-                    <th>NOMBRE</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    
-                </tr>
-            </tbody>
-        </table>
+<section class="tasks-module">
+    <button (click)="openModalCreateTask()" type="button" class="btn btn-primary">
+        Agregar
+    </button>
+    <hr>
+    <div *ngIf="tasks.length === 0">
+        No hay tareas registradas.
     </div>
-    <ul class="list-group">
-        <li class="list-group-item" *ngFor="let task of tasks">
-            <strong>{{task.name}}</strong>
-            <strong>{{task.code}}</strong>
-        </li>
-    </ul>
-</div>
+    <div *ngIf="tasks.length > 0">
+        <div class="filter-wrap">
+            <input [(ngModel)]="searchText" placeholder="Filtrar tareas" class="form-control">
+            <!--<span class="filter-clear" *ngIf="searchText.length>0" (click)="clearFilter()">X</span>-->
+        </div>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>NOMBRE</th>
+                        <th>PROYECTO</th>
+                        <th>FECHA LIMITE</th>
+                        <th>COMENTARIO</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <ul class="list-group">
+            <li class="list-group-item" *ngFor="let task of tasks | filter : searchText">
+                <strong>{{task.name}}</strong>
+                <strong>{{task.project.name}}</strong>
+                <strong>{{task.deadline}}</strong>
+                <strong>{{task.comment}}</strong>
+            </li>
+        </ul>
+    </div>
+</section>
