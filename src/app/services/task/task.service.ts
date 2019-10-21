@@ -1,31 +1,41 @@
 import { Injectable } from '@angular/core';
 import { Task } from "../../models/task/task";
+import { BehaviorSubject, Observable } from 'rxjs';
+import { project } from 'src/app/models/project/project';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TaskService {
 
-  constructor() { }
+  private tasksListSubject: BehaviorSubject<Task[]>;
+  private dataStore: { tasks: Task[] };
+  tasksObject: Observable<Task[]>;
+  
 
-  tasksObject: Array<Task> = [];
+  constructor() {
+    this.tasksListSubject = new BehaviorSubject<Task[]>([new Task("Tarea 1", new project("12222","Proyecto 1"), "21-10-2019", "Comment")]);
+    this.dataStore = { tasks: [new Task("Tarea 1", new project("12222","Proyecto 1"), "21-10-2019", "Comment")]};
+    this.tasksObject = this.tasksListSubject.asObservable();
+  }
 
   /**
    * Almacena una tarea
    * @param task Tarea que se desea guardar
    */
-  setTask(task: Task) {
-    this.tasksObject.push(task);
+  saveTask(task: Task) {
+    this.dataStore.tasks.push(task);
+    this.tasksListSubject.next(Object.assign({}, this.dataStore).tasks);
   }
 
   /**
    * Obtiene todas las tareas almacenadas
    */
-  getTasks():Array<Task>{
-    return this.tasksObject
+  getTasks():Observable<Task[]>{
+    return this.tasksObject;
   }
 
   cleanData(){
-    this.tasksObject = [];
+    this.tasksListSubject.next(null);
   }
 }

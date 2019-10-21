@@ -4,6 +4,7 @@ import { Task } from "../../models/task/task";
 import { TaskService } from "../../services/task/task.service";
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { CreateTaskComponent } from '../create-task/create-task.component';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-task',
@@ -12,7 +13,8 @@ import { CreateTaskComponent } from '../create-task/create-task.component';
 })
 export class TaskComponent implements OnInit {
   
-  public tasks: Array<Task>;
+  public tasks: Observable<Task[]>;
+  //public tasks: Task[];
   public searchText: string;
   public bsModalRef: BsModalRef;
 
@@ -21,6 +23,10 @@ export class TaskComponent implements OnInit {
     private modalService: BsModalService
   ) { 
     this.tasks = this.taskService.getTasks();
+    /*this.taskService.getTasks().subscribe(task => {
+      //console.log(task);
+      this.tasks = task;
+    })*/
   }
 
   ngOnInit() {
