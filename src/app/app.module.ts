@@ -32,7 +32,11 @@ import { TaskComponent } from './components/task/task.component';
 import { SuccessModalComponent } from './components/success-modal/success-modal.component';
 import { FilterPipe } from './pipes/filter/filter.pipe';
 import { CreateTaskComponent } from './components/create-task/create-task.component';
-import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { BsDatepickerModule, BsLocaleService  } from 'ngx-bootstrap/datepicker';
+
+import { defineLocale } from 'ngx-bootstrap/chronos';
+import { deLocale } from 'ngx-bootstrap/locale';
+defineLocale("es", deLocale);
 
 @NgModule({
   declarations: [
@@ -73,4 +77,6 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
     CreateTaskComponent
   ],
 })
-export class AppModule { }
+export class AppModule { 
+  
+}

@@ -3,13 +3,15 @@
         Agregar
     </button>
     <hr>
-    <div *ngIf="tasks.length === 0">
+    <div *ngIf="(tasks | async)?.length === 0">
         No hay tareas registradas.
     </div>
-    <div *ngIf="tasks.length > 0">
-        <div class="filter-wrap">
-            <input [(ngModel)]="searchText" placeholder="Filtrar tareas" class="form-control">
-            <!--<span class="filter-clear" *ngIf="searchText.length>0" (click)="clearFilter()">X</span>-->
+    <div *ngIf="(tasks | async)?.length > 0">
+        <div class="filter-wrap input-group">
+            <input [(ngModel)]="searchText" placeholder="Filtrar tareas" class="form-control py-2 border-right-0 border" id="searchTaskText">
+            <span class="input-group-append" *ngIf="searchText.length>0" (click)="clearFilter()">
+                <button class="btn btn-outline-secondary" type="button" id="button-remove">Borrar</button>
+            </span>
         </div>
         <div class="table-responsive">
             <table class="table">
@@ -22,7 +24,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let task of tasks | async">
+                    <tr *ngFor="let task of tasks | filter : searchText | async" (click)="routeToTaskDetails()">
                         <td>{{task.name}}</td>
                         <td>{{task.project.name}}</td>
                         <td>{{task.deadline}}</td>

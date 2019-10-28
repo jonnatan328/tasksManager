@@ -14,21 +14,17 @@ import { Observable } from 'rxjs';
 export class TaskComponent implements OnInit {
   
   public tasks: Observable<Task[]>;
-  //public tasks: Task[];
   public searchText: string;
   public bsModalRef: BsModalRef;
 
   constructor(
     private taskService: TaskService,
     private modalService: BsModalService
-  ) { 
+  ) {
+    this.searchText = ""; 
     this.tasks = this.taskService.getTasks();
-    /*this.taskService.getTasks().subscribe(task => {
-      //console.log(task);
-      this.tasks = task;
-    })*/
   }
-
+  
   ngOnInit() {
   }
 
@@ -47,6 +43,10 @@ export class TaskComponent implements OnInit {
       title: 'Crear tarea'
     };
     this.bsModalRef = this.modalService.show(CreateTaskComponent, {initialState});
+  }
+
+  routeToTaskDetails(){
+    
   }
 
 }

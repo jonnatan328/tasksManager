@@ -17,18 +17,17 @@
             <div class="form-group">
                 <label for="project" class="label-signup text-uppercase">Proyecto</label>
                 <select id="project" formControlName="project" class="form-control" [ngClass]="{ 'is-invalid': createTaskFormCtrl.project.touched && createTaskFormCtrl.project.errors }">
-                    <option >Seleccione un proyecto</option>
-                    <option *ngFor="let project of projects">{{project.name}}</option>
+                    <option value="">Seleccione un proyecto</option>
+                    <option *ngFor="let project of projects" [ngValue]="project">{{project.name}}</option>
                 </select>
                 <div *ngIf="createTaskFormCtrl.project.invalid && (createTaskFormCtrl.project.dirty || createTaskFormCtrl.project.touched)" class="invalid-feedback">
-                    <div *ngIf="createTaskFormCtrl.project.errors.required">El apellido es requerido</div>
+                    <div *ngIf="createTaskFormCtrl.project.errors.required">El proyecto es requerido</div>
                 </div>
             </div>
             <div class="form-group">
                 <label for="deadline" class="label-signup text-uppercase">Fecha limite</label>
-                <input type="text" id="deadline" bsDatepicker formControlName="deadline" class="form-control" placeholder="Seleccione la fecha limite"
-                    [bsConfig]="{ isAnimated: true }"
-                    [ngClass]="{ 'is-invalid': createTaskFormCtrl.deadline.touched && createTaskFormCtrl.deadline.errors }">
+                <input id="deadline" autocomplete="off" bsDatepicker formControlName="deadline" class="form-control" placeholder="Seleccione la fecha limite"
+                    [bsConfig]="bsConfig" [ngClass]="{ 'is-invalid': createTaskFormCtrl.deadline.touched && createTaskFormCtrl.deadline.errors }" [outsideClick]="true"> 
                 <div *ngIf="createTaskFormCtrl.deadline.invalid && (createTaskFormCtrl.deadline.dirty || createTaskFormCtrl.deadline.touched)" class="invalid-feedback">
                         <div *ngIf="createTaskFormCtrl.deadline.errors.required">La fecha limite es requerida</div>
                 </div>
