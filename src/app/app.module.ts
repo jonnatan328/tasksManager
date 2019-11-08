@@ -24,6 +24,8 @@ import { FormsModule } from '@angular/forms';
 
 import { HttpClientModule, HTTP_INTERCEPTORS  } from '@angular/common/http';
 
+import { DatePipe } from '@angular/common';
+
 //Servicios
 import { InterceptorService } from './services/interceptor/interceptor.service';
 import { APP_CONFIG, APP_DI_CONFIG } from "./services/appConfig/appConfig.constants";
@@ -36,6 +38,7 @@ import { BsDatepickerModule, BsLocaleService  } from 'ngx-bootstrap/datepicker';
 
 import { defineLocale } from 'ngx-bootstrap/chronos';
 import { deLocale } from 'ngx-bootstrap/locale';
+import { EditTaskComponent } from './components/edit-task/edit-task.component';
 defineLocale("es", deLocale);
 
 @NgModule({
@@ -50,7 +53,8 @@ defineLocale("es", deLocale);
     TaskComponent,
     SuccessModalComponent,
     FilterPipe,
-    CreateTaskComponent
+    CreateTaskComponent,
+    EditTaskComponent
   ],
   imports: [
     BrowserModule,
@@ -68,7 +72,8 @@ defineLocale("es", deLocale);
   ],
   providers: [
     { provide: APP_CONFIG, useValue: APP_DI_CONFIG },
-    { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true, },
+    DatePipe
   ],
   bootstrap: [AppComponent],
   entryComponents: [

@@ -10,6 +10,9 @@ import { BsLocaleService } from 'ngx-bootstrap/datepicker';
 import { TaskService } from 'src/app/services/task/task.service';
 import { Task } from 'src/app/models/task/task';
 
+import { DatePipe } from '@angular/common';
+import { ToastrService } from 'ngx-toastr';
+
 @Component({
   selector: 'app-create-task',
   templateUrl: './create-task.component.html',
@@ -22,19 +25,23 @@ export class CreateTaskComponent implements OnInit {
   createTaskForm: FormGroup;
   bsConfig: {};
   task: Task;
+  dateFormat: string;
 
   constructor(
     private projectService: ProjectService,
     private taskService: TaskService,
     public bsModalRef: BsModalRef,
     public formBuilder: FormBuilder,
-    private localeService: BsLocaleService
+    private localeService: BsLocaleService,
+    private datePipe: DatePipe,
+    private toastr: ToastrService
   ) { 
     this.projects = this.projectService.getProjects();
     this.localeService.use(this.locale); // Configura el datepicker en espanol
+    this.dateFormat = 'dd-MM-yyyy';
     this.bsConfig = { // configuracion para el datepicker
        isAnimated: true,
-        dateInputFormat: 'MMMM Do YYYY',
+        dateInputFormat: 'MMMM DD YYYY',
         containerClass: 'theme-dark-blue' 
       }
   }
@@ -59,12 +66,19 @@ export class CreateTaskComponent implements OnInit {
 
     this.task = new Task(this.createTaskFormCtrl.name.value, 
       this.createTaskFormCtrl.project.value,
-      this.createTaskFormCtrl.deadline.value,
+      this.datePipe.transform(this.createTaskFormCtrl.deadline.value, this.dateFormat),
       this.createTaskFormCtrl.comment.value
     )
     
-    this.taskService.saveTask(this.task);
-    this.bsModalRef.hide();
+    let response = this.taskService.saveTask(this.task);
+    if (response.code === "200") {
+      this.bsModalRef.hide();
+      this.taskService.getGroupByProject();
+    } else if(response.code === "301") {
+      this.toastr.error('', "Ya existe un tarea con el nombre ingresado.", {
+        positionClass: 'toast-bottom-center'
+      });
+    }
     
   }
 

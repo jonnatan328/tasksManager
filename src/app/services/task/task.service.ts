@@ -24,8 +24,45 @@ export class TaskService {
    * @param task Tarea que se desea guardar
    */
   saveTask(task: Task) {
+    let taskCreated = this.dataStore.tasks.find(taskCreated => taskCreated.name.toUpperCase() === task.name.toUpperCase());
+    if (taskCreated) {
+        return {
+          code: '301',
+          message: 'error'
+        }
+    } 
     this.dataStore.tasks.push(task);
     this.tasksListSubject.next(Object.assign({}, this.dataStore).tasks);
+    return {
+      code: '200',
+      message: 'success'
+    }
+  }
+
+  /**
+   * Edita una tarea
+   * @param task Tarea que se desea guardar
+   */
+  editTask(task: Task, taskName: string) {
+    let updateTask = this.dataStore.tasks.find(taskCreated => taskCreated.name === taskName);
+    let index = this.dataStore.tasks.indexOf(updateTask);
+
+    let cloneArray = Object.assign([], this.dataStore.tasks);
+    cloneArray.splice(index, 1);
+    let taskCreated = cloneArray.find(taskCreated => taskCreated.name.toUpperCase() === task.name.toUpperCase());
+    if (taskCreated) {
+        return {
+          code: '301',
+          message: 'error'
+        }
+    }
+    
+    this.dataStore.tasks[index] = task;
+    this.tasksListSubject.next(Object.assign({}, this.dataStore).tasks);
+    return {
+      code: '200',
+      message: 'success'
+    }
   }
 
   /**
@@ -33,6 +70,22 @@ export class TaskService {
    */
   getTasks():Observable<Task[]>{
     return this.tasksObject;
+  }
+
+  /**
+   * Obtiene las tareas agrupadas por proyecto
+   */
+  getGroupByProject(){
+    let key = "project";
+    const groupBy = this.dataStore.tasks.reduce(
+      (result, item) => {
+        (result[item[key].name] = result[item[key].name] || []).push(item);
+        return result;
+      }, 
+      {}
+    );
+    console.log("Group by: ", groupBy);
+    
   }
 
   cleanData(){

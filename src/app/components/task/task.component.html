@@ -14,7 +14,7 @@
             </span>
         </div>
         <div class="table-responsive">
-            <table class="table">
+            <table class="table table-hover">
                 <thead>
                     <tr>
                         <th>NOMBRE</th>
@@ -24,7 +24,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let task of tasks | filter : searchText | async" (click)="routeToTaskDetails()">
+                    <tr *ngFor="let task of tasks | filter : searchText | async" (click)="routeToTaskDetails(task)" class="task-row">
                         <td>{{task.name}}</td>
                         <td>{{task.project.name}}</td>
                         <td>{{task.deadline}}</td>

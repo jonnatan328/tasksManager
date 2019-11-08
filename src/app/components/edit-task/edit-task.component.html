@@ -1,0 +1,55 @@
+<div class="edit-task-seccion">
+    <div class="row justify-content-center">
+        <div class="col col-sm-7 col-md-7 col-lg-5 col-xl-4">
+            <div class="rounded-lg shadow bg-white rounded">
+                <h2 class="text-center">Editar tarea</h2>
+                <form [formGroup]="editTaskForm" (ngSubmit)="onSubmit()" class="signup-form">
+                    <div class="form-group">
+                        <label for="name" class="label-signup text-uppercase">Nombre</label>
+                        <input type="text" id="name" formControlName="name" class="form-control" placeholder=""
+                            [ngClass]="{ 'is-invalid': editTaskFormCtrl.name.touched && editTaskFormCtrl.name.errors }">
+                        <div *ngIf="editTaskFormCtrl.name.invalid && (editTaskFormCtrl.name.dirty || editTaskFormCtrl.name.touched)"
+                            class="invalid-feedback">
+                            <div *ngIf="editTaskFormCtrl.name.errors.required">El nombre es requerido</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="project" class="label-signup text-uppercase">Proyecto</label>
+                        <select id="project" formControlName="project" class="form-control"
+                            [ngClass]="{ 'is-invalid': editTaskFormCtrl.project.touched && editTaskFormCtrl.project.errors }">
+                            <option value="">Seleccione un proyecto</option>
+                            <option *ngFor="let project of projects" [ngValue]="project">{{project.name}}</option>
+                        </select>
+                        <div *ngIf="editTaskFormCtrl.project.invalid && (editTaskFormCtrl.project.dirty || editTaskFormCtrl.project.touched)"
+                            class="invalid-feedback">
+                            <div *ngIf="editTaskFormCtrl.project.errors.required">El proyecto es requerido</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="deadline" class="label-signup text-uppercase">Fecha limite</label>
+                        <input id="deadline" autocomplete="off" bsDatepicker formControlName="deadline" class="form-control"
+                            placeholder="Seleccione la fecha limite" [bsConfig]="bsConfig"
+                            [ngClass]="{ 'is-invalid': editTaskFormCtrl.deadline.touched && editTaskFormCtrl.deadline.errors }"
+                            [outsideClick]="true">
+                        <div *ngIf="editTaskFormCtrl.deadline.invalid && (editTaskFormCtrl.deadline.dirty || editTaskFormCtrl.deadline.touched)"
+                            class="invalid-feedback">
+                            <div *ngIf="editTaskFormCtrl.deadline.errors.required">La fecha limite es requerida</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="comment" class="label-signup text-uppercase">Comentario</label>
+                        <textarea id="comment" formControlName="comment" class="form-control" placeholder=""
+                            [ngClass]="{ 'is-invalid': editTaskFormCtrl.comment.touched && editTaskFormCtrl.comment.errors }"></textarea>
+                        <div *ngIf="editTaskFormCtrl.comment.invalid && (editTaskFormCtrl.comment.dirty || editTaskFormCtrl.comment.touched)"
+                            class="invalid-feedback">
+                            <div *ngIf="editTaskFormCtrl.comment.errors.required">El comentario es requerido</div>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-success" [disabled]="editTaskForm.invalid">Enviar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
