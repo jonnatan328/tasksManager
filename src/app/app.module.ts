@@ -39,6 +39,8 @@ import { BsDatepickerModule, BsLocaleService  } from 'ngx-bootstrap/datepicker';
 import { defineLocale } from 'ngx-bootstrap/chronos';
 import { deLocale } from 'ngx-bootstrap/locale';
 import { EditTaskComponent } from './components/edit-task/edit-task.component';
+import { ListProjectComponent } from './components/list-project/list-project.component';
+import { AccordionModule } from 'ngx-bootstrap/accordion';
 defineLocale("es", deLocale);
 
 @NgModule({
@@ -54,7 +56,8 @@ defineLocale("es", deLocale);
     SuccessModalComponent,
     FilterPipe,
     CreateTaskComponent,
-    EditTaskComponent
+    EditTaskComponent,
+    ListProjectComponent
   ],
   imports: [
     BrowserModule,
@@ -68,7 +71,8 @@ defineLocale("es", deLocale);
     ButtonsModule,
     ModalModule.forRoot(),
     ToastrModule.forRoot(),
-    BsDatepickerModule.forRoot()
+    BsDatepickerModule.forRoot(),
+    AccordionModule.forRoot()
   ],
   providers: [
     { provide: APP_CONFIG, useValue: APP_DI_CONFIG },

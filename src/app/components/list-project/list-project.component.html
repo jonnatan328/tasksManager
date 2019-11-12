@@ -1,0 +1,8 @@
+<div *ngIf="tasksGrouped === 'undefined' || tasksGrouped.length === 0">
+    No hay tareas registradas.
+</div>
+<accordion>
+    <accordion-group *ngFor="let project of tasksGrouped" [heading]="project.name">
+        <div *ngFor="let item of project.task">{{item}}</div>
+    </accordion-group>
+  </accordion>
