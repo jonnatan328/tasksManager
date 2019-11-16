@@ -1,8 +1,15 @@
-<div *ngIf="tasksGrouped === 'undefined' || tasksGrouped.length === 0">
-    No hay tareas registradas.
-</div>
-<accordion>
-    <accordion-group *ngFor="let project of tasksGrouped" [heading]="project.name">
-        <div *ngFor="let item of project.task">{{item}}</div>
-    </accordion-group>
-  </accordion>
+<section class="projects-section">
+    <h3>Proyectos</h3>
+    <div *ngIf="projects.length === 0">
+        No hay tareas registradas.
+    </div>
+    <accordion [isAnimated]="true" [closeOthers]="true">
+        <accordion-group *ngFor="let project of projects " [heading]="project" class="element-accordion">
+            <div *ngFor="let item of tasksGrouped[project]">
+                <span class="col-sm-3">Nombre: {{item.name}}</span>
+                <span class="col-sm-3">Fecha limite: {{item.deadline}}</span>
+                <span class="col-sm-3">Comentario: {{item.comment}}</span>
+            </div>
+        </accordion-group>
+    </accordion>
+</section>

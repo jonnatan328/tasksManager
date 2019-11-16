@@ -9,17 +9,20 @@ import { TaskService } from 'src/app/services/task/task.service';
 export class ListProjectComponent implements OnInit {
 
   tasksGrouped: any = [];
+  projects: Array<string>;
+  elementAccordionClass: string;
 
   constructor(
     private taskService: TaskService
   ) { 
-    
+    this.tasksGrouped = this.taskService.getGroupByProject();
+    this.projects = Object.keys(this.tasksGrouped);
+    this.elementAccordionClass = "element-accordion";
+    console.log(this.tasksGrouped);
   }
   
   ngOnInit() {
     
-    this.tasksGrouped = this.taskService.getGroupByProject();
-    console.log(this.tasksGrouped);
   }
 
 }

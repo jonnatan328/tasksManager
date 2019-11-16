@@ -85,7 +85,7 @@ export class TaskService {
       {}
     );
     console.log("Group by: ", groupBy);
-    
+    return groupBy;
   }
 
   cleanData(){
